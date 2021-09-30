@@ -15,7 +15,7 @@ namespace BlobStorageV12
         {
             Console.WriteLine("Azure Blob Storage V12 - .NET sample");
             string connectionString = Environment.GetEnvironmentVariable("connectionString");
-            Console.WriteLine(connectionString); //here you can see if the environment variable is working
+            //Console.WriteLine(connectionString); //here you can see if the environment variable is working
 
             BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
 
@@ -24,12 +24,6 @@ namespace BlobStorageV12
 
             Console.Write("press '1' to create a new blob container\npress '2' to create a blob in existingblob container\nEnter your value: ");
             var options = Console.ReadLine();
-
-
-            // Create a local file in the ./data/ directory for uploading and downloading
-            //string localPath = "./data/";
-            //string fileName = "quickstart" + Guid.NewGuid().ToString() + ".txt";
-            //string localFilePath = Path.Combine(localPath, fileName);
 
             switch (Convert.ToInt32(options))
             {
