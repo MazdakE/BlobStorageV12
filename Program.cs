@@ -22,7 +22,7 @@ namespace BlobStorageV12
             // container names
             var availableContainersName = await GetAllContainerNames(blobServiceClient);
 
-            Console.Write("press '1' to create a new blob container\npress '2' to create a blob in existingblob container\nEnter your value: ");
+            Console.Write("Press '1' to create a new blob container\nPress '2' to create a blob in existingblob container\nPress '3' to upload an image to an existing container\nEnter your value: ");
             var options = Console.ReadLine();
 
             switch (Convert.ToInt32(options))
@@ -128,11 +128,13 @@ namespace BlobStorageV12
 
                 BlobClient blobClient = container.GetBlobClient(fileName);
 
+                var imageUri = blobClient.Uri.AbsoluteUri;
+
                 var blobHttpHeader = new BlobHttpHeaders { ContentType = "image/jpg" };
 
                 var blobUploadOptions = new BlobUploadOptions() { HttpHeaders = blobHttpHeader };
 
-                Console.WriteLine(blobUploadOptions.HttpHeaders);
+                Console.WriteLine(imageUri);
 
                 await blobClient.UploadAsync(localFilePath, blobUploadOptions);
 
