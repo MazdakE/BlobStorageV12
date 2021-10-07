@@ -30,13 +30,13 @@ namespace BlobStorageV12
                 case 1:
                     Console.Write("Enter name of your new blob container: ");
                     string containerName = Console.ReadLine();
-                    var condition = CheckIfBlobExists(availableContainersName.ToList(), blobServiceClient, containerName);
-                    await CreateBlob(blobServiceClient, containerName, condition);
+                    var condition = CheckIfBlobContainerExists(availableContainersName.ToList(), blobServiceClient, containerName);
+                    await CreateBlobContainer(blobServiceClient, containerName, condition);
                     break;
                 case 2:
                     Console.Write("Enter name of your existing blob container: ");
                     containerName = Console.ReadLine();
-                    condition = CheckIfBlobExists(availableContainersName.ToList(), blobServiceClient, containerName);
+                    condition = CheckIfBlobContainerExists(availableContainersName.ToList(), blobServiceClient, containerName);
                     Console.Write("Write a name for your blob: ");
                     string blobName = Console.ReadLine();
                     CreateBlobInExistingContainer(containerName, connectionString, blobName, containerExist: condition);
@@ -66,7 +66,7 @@ namespace BlobStorageV12
             }
         }
 
-        private static async Task CreateBlob(BlobServiceClient blobServiceClient, string containerName, bool containerExist)
+        private static async Task CreateBlobContainer(BlobServiceClient blobServiceClient, string containerName, bool containerExist)
         {
             if (!containerExist)
             {
@@ -74,7 +74,7 @@ namespace BlobStorageV12
             }
         }
 
-        private static bool CheckIfBlobExists(List<string> containerNames, BlobServiceClient blobServiceClient, string containerName)
+        private static bool CheckIfBlobContainerExists(List<string> containerNames, BlobServiceClient blobServiceClient, string containerName)
         {
             if (containerNames.Contains(containerName))
             {
